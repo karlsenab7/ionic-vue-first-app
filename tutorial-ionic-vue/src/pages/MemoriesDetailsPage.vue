@@ -4,14 +4,22 @@
     defaultBackLink="/memories"
   >
     <h2 v-if="!loadedMemory">Could not find a memory for the given id.</h2>
-    <h2 v-else>Store Loaded Successfully</h2>
+    <memory-overview
+      v-else
+      :title="loadedMemory.title"
+      :image="loadedMemory.image"
+      :description="loadedMemory.description"
+    ></memory-overview>
   </base-layout>
 </template>
 
 <script>
-import {} from "@ionic/vue";
+import MemoryOverview from "../components/memories/MemoryOverview.vue";
 
 export default {
+  components: {
+    MemoryOverview,
+  },
   data() {
     return {
       memoryID: this.$route.params.id,
@@ -22,10 +30,10 @@ export default {
       return this.$store.getters.memory(this.memoryID);
     },
   },
-//   watch: {
-//     $route(currentRoute) {
-//       this.memoryID = currentRoute.params.id;
-//     },
-//   },
+  //   watch: {
+  //     $route(currentRoute) {
+  //       this.memoryID = currentRoute.params.id;
+  //     },
+  //   },
 };
 </script>
