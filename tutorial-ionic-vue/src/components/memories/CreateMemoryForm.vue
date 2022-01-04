@@ -1,22 +1,22 @@
 <template>
-  <form class="ion-padding">
+  <form class="ion-padding" @submit.prevent="submitForm">
     <ion-list>
       <ion-item>
         <ion-label position="floating">Title</ion-label>
-        <ion-input type="text" required />
+        <ion-input type="text" required v-model="enteredTitle" />
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Image URL</ion-label>
-        <ion-input type="url" required />
+        <ion-input type="url" required v-model="enteredImageURL" />
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Description</ion-label>
-        <ion-textarea rows="5"></ion-textarea>
+        <ion-textarea rows="5" v-model="enteredDescription" />
       </ion-item>
     </ion-list>
-    <ion-button expand="block">Add</ion-button>
+    <ion-button type="submit" expand="block">Add</ion-button>
     <!-- <ion-button expand="block" fill="outline">Add</ion-button> -->
   </form>
 </template>
@@ -32,6 +32,7 @@ import {
 } from "@ionic/vue";
 
 export default {
+  emits: ["save-memory"],
   components: {
     IonList,
     IonItem,
@@ -39,6 +40,23 @@ export default {
     IonInput,
     IonTextarea,
     IonButton,
+  },
+  data() {
+    return {
+      enteredTitle: "",
+      enteredImageURL: "",
+      enteredDescription: "",
+    };
+  },
+  methods: {
+    submitForm() {
+      const memoryData = {
+        title: this.enteredTitle,
+        imageURL: this.enteredImageURL,
+        description: this.enteredDescription,
+      };
+      this.$emit("save-memory", memoryData);
+    },
   },
 };
 </script>
