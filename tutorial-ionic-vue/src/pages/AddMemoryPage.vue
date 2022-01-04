@@ -1,12 +1,17 @@
 <template>
   <base-layout pageTitle="Add a Memory" defaultBackLink="/memories">
-    <h2>Add a Memory...</h2>
+    <create-memory-form></create-memory-form>
   </base-layout>
 </template>
 
 <script>
 import BaseLayout from "../components/base/BaseLayout.vue";
+import CreateMemoryForm from "../components/memories/CreateMemoryForm.vue";
+
 export default {
-  components: { BaseLayout },
+  components: {
+    BaseLayout,
+    CreateMemoryForm,
+  },
 };
 </script>
